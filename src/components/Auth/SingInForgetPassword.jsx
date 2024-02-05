@@ -7,10 +7,9 @@ export default function SingInForgetPassword() {
     <div>
       <GenericLogin
         imgSrc="/images/mony_logo_auth.svg"
-        mainTitle="Saisissez votre mot de passe"
+        mainTitle="Mot de passe oublié ?"
         subTitle="Recevoir un lien pour réinitialiser le mot de passe"
-        buttonText="Envoyer"
-        rediretTo="/signin-password"
+        buttonText="Continuer"
         isForgetPassword="retour à la page de connexion"
       >
         <Box component="form" autoComplete="off">
