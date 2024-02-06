@@ -1,19 +1,16 @@
 import { Box, Button, Typography } from '@mui/material';
 import React from 'react'
-import { useLocation, useNavigate } from 'react-router-dom';
 
 export default function GenericLogin(props) {
-  const navigate = useNavigate();
-  const location = useLocation();
-  const isLoginEmail = location.pathname === '/';
-    const { 
-        imgSrc,
-        mainTitle,
-        subTitle,
-        children,
-        buttonText,
-        isForgetPassword,
-     } = props;
+  const { 
+      imgSrc,
+      mainTitle,
+      subTitle,
+      children,
+      buttonText,
+      handleSignInSubmit,
+      isForgetPassword,
+    } = props;
 
   return (
       <Box 
@@ -65,6 +62,7 @@ export default function GenericLogin(props) {
                 fontSize:"20px",
                 fontWeight:"600",
               }} 
+              onClick={handleSignInSubmit}
             >{buttonText}
           </Button>  
         </Box>
