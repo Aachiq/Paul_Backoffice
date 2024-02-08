@@ -31,7 +31,8 @@ export default function GenericLogin(props) {
             justifyContent:"space-between",
             alignItems:"center",
             borderRadius:"16px",
-            padding:"25px"
+            paddingX:"25px",
+            paddingY:"27px",
           }}
       >
         <Box>
