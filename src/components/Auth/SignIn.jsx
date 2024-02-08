@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
 import GenericLogin from './../../common/components/GenericLogin';
 import { Box, FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput, TextField, Typography } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
-import { loginBo } from '../../common/services/auth/auth.service';
+import { setLocalStorage } from '../../common/utils/auth_helper';
+import { loginBo } from '../../common/services/api/auth/auth.service';
 
 export default function SignIn() {
   const [loginData, setLoginData] = useState({
@@ -11,7 +12,8 @@ export default function SignIn() {
     password: ""
   });
   const [showPassword, setShowPassword] = useState(false);
-  
+  const navigate = useNavigate();
+
   // handleClick password icon
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -26,14 +28,12 @@ export default function SignIn() {
   const handleSignInSubmit = (event) => {
     event.preventDefault();
     loginBo(loginData)
-     .then(res => res.json())
-     .then(data => {
-      console.log(data);
-      // store token and useData in LocalStorage or Redux Store
-      // redirect to Home Page
-      // deploy databse and week 1
-     })
-     .catch(err => console.log(err))
+    .then((res) => res.json())
+    .then((data) => {
+       setLocalStorage(data);
+       navigate('/home')
+    })
+    .catch((err) => console.log(err))
   }
 
   return (
@@ -42,11 +42,11 @@ export default function SignIn() {
         imgSrc="/images/mony_logo_auth.svg"
         mainTitle="Bienvenue"
         subTitle="Connectez-vous à Monny pour accèder à votre dashboard."
-        buttonText="Continuer"
+        buttonText="Se connecter"
         handleSignInSubmit={handleSignInSubmit}
       >
         <Box component="form" autoComplete="on">
-          <TextField 
+          <TextField
             label="Adresse e-mail" 
             name="email"
             sx={{
