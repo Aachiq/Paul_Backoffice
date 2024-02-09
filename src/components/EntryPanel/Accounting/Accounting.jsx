@@ -13,23 +13,6 @@ export default function Accounting() {
           <SideBar/>
         </Grid>
         <Grid item md={10} bgcolor={"#F0F0F0"}>
-          {/* <Typography variant="h3">
-            Hello Acounting 
-          </Typography> */}
-          {/* <TextField
-            id="filled-basic"
-            label="Filled"
-            variant="filled"
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <IconButton>
-                    <SearchIcon />
-                  </IconButton>
-                </InputAdornment>
-              ),
-            }}
-          /> */}
           <Box display={"flex"} flexDirection={"row"} justifyContent={"space-between"} alignItems={"center"}  bgcolor={"#FFFFFF"}>
             <Box padding={1}>
               <TextField

@@ -10,7 +10,7 @@ export default function Routing() {
      <div>
         <Routes>
           <Route path="/" exact element={<SignIn/>}/>
-          <Route path="/signin-forget-password" exact element={<SingInForgetPassword/>}/>
+          {/* <Route path="/signin-forget-password" exact element={<SingInForgetPassword/>}/> */}
           <Route path="/home" exact element={<Home/>}/>
           <Route path="/comptabilite" exact element={<Accounting/>}/>
        </Routes>

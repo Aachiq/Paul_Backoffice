@@ -1,4 +1,4 @@
-import { Box, FormControl, InputLabel, MenuItem, Paper, Select, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField } from '@mui/material'
+import { Box, Chip, FormControl, InputLabel, MenuItem, Paper, Select, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField } from '@mui/material'
 import React, { useState } from 'react'
 
 export default function AccountingOperations() {
@@ -21,7 +21,7 @@ export default function AccountingOperations() {
         porboire:25.00,
         SousTotal:100,
         total:200,
-        status:"Réussi",
+        status:"Echoué",
         statusPos:"Notifié",
     },
     {
@@ -31,8 +31,8 @@ export default function AccountingOperations() {
         porboire:25.00,
         SousTotal:100,
         total:200,
-        status:"Réussi",
-        statusPos:"Notifié",
+        status:"Echoué",
+        statusPos:"Non Notifié",
     },
     {
         tableNum:4,
@@ -51,7 +51,57 @@ export default function AccountingOperations() {
         porboire:25.00,
         SousTotal:100,
         total:200,
-        status:"Réussi",
+        status:"Echoué",
+        statusPos:"Notifié",
+    },
+    {
+        tableNum:6,
+        date:"22/03/2023",
+        paymentMethod:"virement",
+        porboire:25.00,
+        SousTotal:100,
+        total:200,
+        status:"Remboursement partiel ",
+        statusPos:"Notifié",
+    },
+    {
+        tableNum:7,
+        date:"22/03/2023",
+        paymentMethod:"virement",
+        porboire:25.00,
+        SousTotal:100,
+        total:200,
+        status:"Remboursement partiel ",
+        statusPos:"Notifié",
+    },
+    {
+        tableNum:8,
+        date:"22/03/2023",
+        paymentMethod:"virement",
+        porboire:25.00,
+        SousTotal:100,
+        total:200,
+        status:"Remboursement partiel ",
+        statusPos:"Notifié",
+    },
+    {
+        tableNum:9,
+        date:"22/03/2023",
+        paymentMethod:"virement",
+        porboire:25.00,
+        SousTotal:100,
+        total:200,
+        status:"Remboursement partiel ",
+        statusPos:"Notifié",
+    },
+    {
+        tableNum:10,
+        date:"22/03/2023",
+        paymentMethod:"virement",
+        porboire:25.00,
+        SousTotal:100,
+        total:200,
+        status:"Remboursement intégral ",
         statusPos:"Notifié",
     },
   ]
@@ -101,15 +151,15 @@ export default function AccountingOperations() {
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
                 <TableHead sx={{backgroundColor: '#F0F0F0'}}>
                     <TableRow>
-                        <TableCell>Table</TableCell>
-                        <TableCell align="right">Date</TableCell>
-                        <TableCell align="right">Méthode de paiment</TableCell>
-                        <TableCell align="right">Pourboire</TableCell>
-                        <TableCell align="right">Sous-total</TableCell>
-                        <TableCell align="right">Total</TableCell>
-                        <TableCell align="right">Status</TableCell>
-                        <TableCell align="right">Status-Pos</TableCell>
-                        <TableCell align="right">Actions</TableCell>
+                        <TableCell sx={{color:"#7C7C7C"}}>Table</TableCell>
+                        <TableCell sx={{color:"#7C7C7C"}} align="right">Date</TableCell>
+                        <TableCell sx={{color:"#7C7C7C"}} align="right">Méthode de paiment</TableCell>
+                        <TableCell sx={{color:"#7C7C7C"}} align="right">Pourboire</TableCell>
+                        <TableCell sx={{color:"#7C7C7C"}} align="right">Sous-total</TableCell>
+                        <TableCell sx={{color:"#7C7C7C"}} align="right">Total</TableCell>
+                        <TableCell sx={{color:"#7C7C7C"}} align="right">Status</TableCell>
+                        <TableCell sx={{color:"#7C7C7C"}} align="right">Status-Pos</TableCell>
+                        <TableCell sx={{color:"#7C7C7C"}} align="right">Actions</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -126,8 +176,25 @@ export default function AccountingOperations() {
                         <TableCell align="right">{row.porboire}</TableCell>
                         <TableCell align="right">{row.SousTotal}</TableCell>
                         <TableCell align="right">{row.total}</TableCell>
-                        <TableCell align="right">{row.status}</TableCell>
-                        <TableCell align="right">{row.statusPos}</TableCell>
+                        <TableCell align="right">
+                            <Stack direction="row" spacing={1}>
+                                <Chip label={row.status} sx={{
+                                    backgroundColor: row.status === "Réussi" ? "#90F487" :
+                                                        row.status === "Echoué" ? "#FF7B7B" :
+                                                        row.status === "Remboursement partiel" ? "#E787FF" :
+                                                        row.status === "Remboursement intégrale" ? "#75F7FF" : null
+                                    }} 
+                                />
+                            </Stack> 
+                        </TableCell>
+                        <TableCell align="right">
+                            <Stack direction="row" spacing={1}>
+                                <Chip label={row.statusPos} sx={{
+                                    backgroundColor: row.statusPos === "Notifié" ? "#90F487" : "#FDFF9B"
+                                    }} 
+                                />
+                            </Stack> 
+                        </TableCell>
                     </TableRow>
                 ))}
                 <TableRow></TableRow>

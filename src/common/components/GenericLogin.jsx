@@ -7,8 +7,6 @@ export default function GenericLogin(props) {
       mainTitle,
       subTitle,
       children,
-      buttonText,
-      handleSignInSubmit,
       isForgetPassword,
     } = props;
 
@@ -50,22 +48,6 @@ export default function GenericLogin(props) {
         </Box>
         <Box marginTop={3} className="childrenComp">
           {children}
-        </Box>
-        <Box sx={{ marginTop: isForgetPassword ? "43px" : "25px", textAlign:'center' }}>
-          <Button 
-              variant="contained"
-              sx={{ 
-                width:'380px',
-                textTransform: 'none',
-                background: 'linear-gradient(to right, #8419E2, #F13727)', 
-                color: 'white',
-                fontFamily:"Poppins",
-                fontSize:"20px",
-                fontWeight:"600",
-              }} 
-              onClick={handleSignInSubmit}
-            >{buttonText}
-          </Button>  
         </Box>
        {
         isForgetPassword && (
