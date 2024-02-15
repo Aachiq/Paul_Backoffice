@@ -13,6 +13,8 @@ export default function SignIn() {
   });
   const [showPassword, setShowPassword] = useState(false);
   const [isFocus, setIsFocus] = useState(false);
+  const [isAuthError, setIsAuthError] = useState(false);
+  const [authErrorMessage, setAuthErrorMessage] = useState("");
   const navigate = useNavigate();
 
   // handleClick password icon
@@ -31,8 +33,14 @@ export default function SignIn() {
     loginBo(loginData)
     .then((res) => res.json())
     .then((data) => {
-       setLocalStorage(data);
-       navigate('/home')
+       // add this in case if res.error
+       if(data.error){
+        setIsAuthError(true)
+        setAuthErrorMessage(data.error)
+       }else{
+         setLocalStorage(data);
+         navigate('/home')
+       }
     })
     .catch((err) => console.log(err))
   }
@@ -49,6 +57,7 @@ export default function SignIn() {
           <TextField
             type="email"
             required
+            error={isAuthError}
             label="Adresse e-mail" 
             name="email"
             onChange={handleChangeSignin}
@@ -78,8 +87,9 @@ export default function SignIn() {
             <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
             <OutlinedInput
               id="outlined-adornment-password"
-              type={showPassword ? 'text' : 'password'}
               required
+              type={showPassword ? 'text' : 'password'}
+              error={isAuthError}
               sx={{ 
                 '& input:focus': {
                   background: '#FFFFFF' // Change background to white when input is focused
@@ -111,9 +121,19 @@ export default function SignIn() {
               }
             />
           </FormControl>
+          {
+            isAuthError && (
+              <Box display={'flex'} alignItems={"center"} alignContent={"center"} marginTop={"13px"}>
+                <img src="/images/auth_error_icon.svg" alt="auth_error_icon" />
+                <Typography color="#E30000" variant='h5' fontSize={15} fontWeight={600}>
+                  {authErrorMessage}
+                </Typography>
+              </Box>
+            )
+          }
           <Link to="" style={{textDecoration:"none"}}>
             <Typography marginTop={"13px"} color="#0500E3" variant='h5' fontSize={17} fontWeight={600}>
-                Mot de passe oublié ?
+              Mot de passe oublié ?
             </Typography>
           </Link>
           <Box sx={{ marginTop: "25px", textAlign:'center' }}>

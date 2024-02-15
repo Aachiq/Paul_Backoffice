@@ -61,32 +61,43 @@ export default function SideBar() {
     }, [location.pathname, sideBarListItems]);
 
   return (
-    <Box bgcolor={'#1B0B29'} height={"100%"}>
-      <Box>
+    <Box bgcolor={'#1B0B29'} height={"100vh"}>
+      <Box 
+        display={'flex'} 
+        alignItems={"center"} 
+        alignContent={"center"}
+        paddingTop={"10px"}
+      >
+        <img src="images/logo_bo.svg" alt="logo_bo" /> 
         <Typography color={"white"}>
-            <img src="images/logo_bo.svg" alt="logo_bo" /> Paul
+            Paul    
         </Typography>
       </Box>
-       {
-         sideBarListItems && sideBarListItems.map((item,key) => {
-            return (
-                <ListItemButton
-                    key={item.label}
-                    sx={{background: item.id === activeItem ? 'linear-gradient(to right, #8419E2, #F13727)' : 'none'}}
-                    onClick={() => handleItemClick(item)}
-                    // sx={{ py: 0, minHeight: 32, color: 'rgba(255,255,255,.8)' }}
-                >
-                    <ListItemIcon sx={{ color: '#FFFFFF', minWidth:"0px", marginRight:"5px"}}>
-                        <img src={`images/sidebar/${item.icon}`} alt="icon_sidebar" srcset="" />
-                    </ListItemIcon>
-                    <ListItemText
-                        primary={item.label}
-                        primaryTypographyProps={{ fontSize: 14, fontWeight: 'medium', color:"#FFFFFF" }}
-                    />
-                </ListItemButton>
-            )
-        })
-       }
+      <Box marginTop={'30px'}>
+        {
+            sideBarListItems && sideBarListItems.map((item,key) => {
+                return (
+                    <ListItemButton
+                        key={item.label}
+                        sx={{ 
+                            background: item.id === activeItem ? 'linear-gradient(to right, #8419E2, #F13727)' : 'none',
+                            marginTop:"10px"
+                        }}
+                        onClick={() => handleItemClick(item)}
+                        // sx={{ py: 0, minHeight: 32, color: 'rgba(255,255,255,.8)' }}
+                    >
+                        <ListItemIcon sx={{ color: '#FFFFFF', minWidth:"0px", marginRight:"5px"}}>
+                            <img src={`images/sidebar/${item.icon}`} alt="icon_sidebar" srcset="" />
+                        </ListItemIcon>
+                        <ListItemText
+                            primary={item.label}
+                            primaryTypographyProps={{ fontSize: 14, fontWeight: 'medium', color:"#FFFFFF" }}
+                        />
+                    </ListItemButton>
+                )
+            })
+        }
+      </Box>
     </Box>
   )
 }
