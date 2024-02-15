@@ -67,11 +67,10 @@ export default function SideBar() {
         alignItems={"center"} 
         alignContent={"center"}
         paddingTop={"10px"}
+        marginLeft={"10px"}
       >
         <img src="images/logo_bo.svg" alt="logo_bo" /> 
-        <Typography color={"white"}>
-            Paul    
-        </Typography>
+        <img src="images/paul_logotype.svg" alt="logo_bo" style={{ marginLeft: "12px" }} /> 
       </Box>
       <Box marginTop={'30px'}>
         {

@@ -2,7 +2,6 @@ import React from 'react'
 import SideBar from '../../../common/components/SideBar'
 import { Avatar, Box, Grid, IconButton, InputAdornment, TextField, Typography } from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search';
-import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import CustomTabs from '../../../common/components/CustomTabs';
 
 export default function Accounting() {
@@ -32,7 +31,7 @@ export default function Accounting() {
             </Box>
             <Box display={"flex"} flexDirection={"row"} alignItems={"center"}>
               <Box marginRight={4}>
-                <NotificationsNoneIcon/>
+                <img src="/images/notif_icon.svg" alt="" />
               </Box>
               <Box display={"flex"}>
                 <Box marginRight={1.5}>
