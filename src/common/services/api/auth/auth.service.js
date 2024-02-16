@@ -12,7 +12,4 @@ export const loginBo = (userAuth) => {
 
 export const logoutBo = () => {
   return fetch(`${API_URL}/signout`)
-  .then((res) => res.json)
-  .then((data) => console.log(data))
-  .catch(err => console.log(err))
 }
