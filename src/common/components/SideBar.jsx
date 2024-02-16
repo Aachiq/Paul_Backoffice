@@ -1,6 +1,7 @@
-import { Box, ListItemButton, ListItemIcon, ListItemText, Typography } from '@mui/material';
+import { Box, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 import React, { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom';
+import './styles/sidebar.css';
 
 export default function SideBar() {
     const sideBarListItems = [
@@ -40,6 +41,12 @@ export default function SideBar() {
             icon: "qr.svg",
             link : "/home"
         },
+        {
+            id: 7,
+            label :"Paramètre",
+            icon: "settings.svg",
+            link : "/comptabilite"
+        },
       ]
     
     const [activeItem, setActiveItem] = useState(1);
@@ -61,12 +68,12 @@ export default function SideBar() {
     }, [location.pathname, sideBarListItems]);
 
   return (
-    <Box bgcolor={'#1B0B29'} height={"100vh"}>
+    <Box bgcolor={'#1B0B29'} height={"600px"}>
       <Box 
         display={'flex'} 
         alignItems={"center"} 
         alignContent={"center"}
-        paddingTop={"10px"}
+        paddingTop={"15px"}
         marginLeft={"10px"}
       >
         <img src="images/logo_bo.svg" alt="logo_bo" /> 
@@ -77,10 +84,14 @@ export default function SideBar() {
             sideBarListItems && sideBarListItems.map((item,key) => {
                 return (
                     <ListItemButton
+                        className={item.id === 7 ? 'parametresItem' : ''}
                         key={item.label}
                         sx={{ 
                             background: item.id === activeItem ? 'linear-gradient(to right, #8419E2, #F13727)' : 'none',
-                            marginTop:"10px"
+                            marginTop:"10px",
+                            borderRadius:"5px",
+                            width:"95%",
+                            margin:"auto",
                         }}
                         onClick={() => handleItemClick(item)}
                         // sx={{ py: 0, minHeight: 32, color: 'rgba(255,255,255,.8)' }}

@@ -1,8 +1,8 @@
 import React from 'react'
 import SideBar from '../../../common/components/SideBar'
-import { Avatar, Box, Grid, IconButton, InputAdornment, TextField, Typography } from '@mui/material'
-import SearchIcon from '@mui/icons-material/Search';
+import { Box, Grid} from '@mui/material'
 import CustomTabs from '../../../common/components/CustomTabs';
+import Header from '../../../common/components/Header';
 
 export default function Accounting() {
   return (
@@ -12,42 +12,9 @@ export default function Accounting() {
           <SideBar/>
         </Grid>
         <Grid item md={10} bgcolor={"#F0F0F0"}>
-          <Box display={"flex"} flexDirection={"row"} justifyContent={"space-between"} alignItems={"center"}  bgcolor={"#FFFFFF"}>
-            <Box padding={1}>
-              <TextField
-                id="filled-basic"
-                label="Filled"
-                variant="filled"
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <IconButton>
-                        <SearchIcon />
-                      </IconButton>
-                    </InputAdornment>
-                  ),
-                }}
-              />
-            </Box>
-            <Box display={"flex"} flexDirection={"row"} alignItems={"center"}>
-              <Box marginRight={4}>
-                <img src="/images/notif_icon.svg" alt="" />
-              </Box>
-              <Box display={"flex"}>
-                <Box marginRight={1.5}>
-                  <Avatar alt="user_picture" src="/images/avatar.png" />
-                </Box>
-                <Box display={"flex"} flexDirection={"column"} marginRight={2.5}>
-                  <Typography variant='p'>Karam Noury</Typography>
-                  <Typography variant='p'>Manager</Typography>
-                </Box>
-              </Box>
-              <Box marginRight={2}>
-                <img src="/images/arrow-down.svg" alt="avatar_img" />
-              </Box>
-            </Box>
-          </Box>
-          {/* use Tabs */}
+          {/* use Headr Component */}
+          <Header/>
+          {/* use Tabs Component */}
           <CustomTabs/>
         </Grid>
       </Grid>
