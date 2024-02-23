@@ -32,7 +32,7 @@ export default function Header() {
                 {/* <AccountCircle sx={{ color: 'action.active', mr: 1, my: 0.5 }} /> */}
                 <SearchIcon fontSize="20px" />
                 <TextField id="input-with-sx" variant="standard" placeholder='Search' 
-                    sx={{marginLeft:"5px", backgroundColor:"#F0F0F0"}}
+                    sx={{marginLeft:"5px"}}
                 />
             </Box>
         </Box>
