@@ -45,7 +45,7 @@ export default function SideBar() {
             id: 7,
             label :"Paramètre",
             icon: "settings.svg",
-            link : "/comptabilite"
+            link : "/settings"
         },
       ]
     
@@ -68,7 +68,9 @@ export default function SideBar() {
     }, [location.pathname, sideBarListItems]);
 
   return (
-    <Box bgcolor={'#1B0B29'} height={"600px"}>
+    <Box bgcolor={'#1B0B29'} 
+          sx={{ position: "fixed", height: "100%", width:"210px", zIndex:"1000" }}
+    >
       <Box 
         display={'flex'} 
         alignItems={"center"} 
@@ -79,34 +81,72 @@ export default function SideBar() {
         <img src="images/logo_bo.svg" alt="logo_bo" /> 
         <img src="images/paul_logotype.svg" alt="logo_bo" style={{ marginLeft: "12px" }} /> 
       </Box>
-      <Box marginTop={'30px'}>
-        {
-            sideBarListItems && sideBarListItems.map((item,key) => {
-                return (
-                    <ListItemButton
-                        className={item.id === 7 ? 'parametresItem' : ''}
-                        key={item.label}
-                        sx={{ 
-                            background: item.id === activeItem ? 'linear-gradient(to right, #8419E2, #F13727)' : 'none',
-                            marginTop:"10px",
-                            borderRadius:"5px",
-                            width:"95%",
-                            margin:"auto",
-                        }}
-                        onClick={() => handleItemClick(item)}
+      <Box marginTop={"30px"} height={"87vh"} display={"flex"} flexDirection={"column"} justifyContent={"space-between"}>
+        <Box>
+            {
+                sideBarListItems && sideBarListItems.map((item, key) => {
+                    if (item.id === 7) {
+                        return null;
+                    }
+                    return (
+                        <ListItemButton
+                            key={item.label}
+                            sx={{
+                                background: item.id === activeItem ? 'linear-gradient(to right, #8419E2, #F13727)' : 'none',
+                                marginTop: "10px",
+                                borderRadius: "5px",
+                                width: "95%",
+                                // width: "100%",
+                                margin: "auto",
+                                marginBottom: item.id === 7 ? 'auto' : '10px',
+                            }}
+                            onClick={() => handleItemClick(item)}
                         // sx={{ py: 0, minHeight: 32, color: 'rgba(255,255,255,.8)' }}
-                    >
-                        <ListItemIcon sx={{ color: '#FFFFFF', minWidth:"0px", marginRight:"5px"}}>
-                            <img src={`images/sidebar/${item.icon}`} alt="icon_sidebar" srcset="" />
-                        </ListItemIcon>
-                        <ListItemText
-                            primary={item.label}
-                            primaryTypographyProps={{ fontSize: 14, fontWeight: 'medium', color:"#FFFFFF" }}
-                        />
-                    </ListItemButton>
-                )
-            })
-        }
+                        >
+                            <ListItemIcon sx={{ color: '#FFFFFF', minWidth: "0px", marginRight: "5px" }}>
+                                <img src={`images/sidebar/${item.icon}`} alt="icon_sidebar" srcset="" />
+                            </ListItemIcon>
+                            <ListItemText
+                                primary={item.label}
+                                primaryTypographyProps={{ fontSize: 14, fontWeight: 'medium', color: "#FFFFFF" }}
+                            />
+                        </ListItemButton>
+                    )
+                })
+            }
+        </Box>
+        <Box>
+            {
+                sideBarListItems && sideBarListItems.map((item, key) => {
+                    if (item.id !== 7) {
+                        return null;
+                    }
+                    return (
+                        <ListItemButton
+                            key={item.label}
+                            sx={{
+                                background: item.id === activeItem ? 'linear-gradient(to right, #8419E2, #F13727)' : 'none',
+                                marginTop: "10px",
+                                borderRadius: "5px",
+                                width: "95%",
+                                margin: "auto",
+                                marginBottom: item.id === 7 ? 'auto' : '10px',
+                            }}
+                            onClick={() => handleItemClick(item)}
+                        // sx={{ py: 0, minHeight: 32, color: 'rgba(255,255,255,.8)' }}
+                        >
+                            <ListItemIcon sx={{ color: '#FFFFFF', minWidth: "0px", marginRight: "5px" }}>
+                                <img src={`images/sidebar/${item.icon}`} alt="icon_sidebar" srcset="" />
+                            </ListItemIcon>
+                            <ListItemText
+                                primary={item.label}
+                                primaryTypographyProps={{ fontSize: 14, fontWeight: 'medium', color: "#FFFFFF" }}
+                            />
+                        </ListItemButton>
+                    )
+                })
+            }
+        </Box>
       </Box>
     </Box>
   )
