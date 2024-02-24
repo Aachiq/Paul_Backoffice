@@ -32,7 +32,7 @@ export default function AccountingOperations() {
         porboire:25.45,
         SousTotal:100.49,
         total:200.20,
-        status:"Échoué",
+        status:"En attente",
         statusPos:"Non Notifié",
     },
     {
@@ -123,6 +123,9 @@ export default function AccountingOperations() {
                 break; 
             case "Échoué": 
                 statusColor = "#FF7B7B";
+                break; 
+            case "En attente": 
+                statusColor = "#FFBC39";
                 break; 
             case "Remboursement partiel ": 
                 statusColor = "#E787FF";
@@ -243,7 +246,7 @@ export default function AccountingOperations() {
                                         backgroundColor: getStatusBackgorundColor(row.status)
                                     }} 
                                 />
-                                { row.status === "Échoué" && <img src="/images/accounting/icon-failed-status.svg" alt="icon-failed-status" /> }
+                                { (row.status === "Échoué" || row.status === "En attente") && <img src="/images/accounting/icon-failed-status.svg" alt="icon-failed-status" /> }
                             </Stack> 
                         </TableCell>
                         <TableCell align="left" sx={{paddingX:"5px", paddingY:"10px" }}>
