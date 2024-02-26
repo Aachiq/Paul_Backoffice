@@ -1,119 +1,149 @@
-import { Box, Chip, FormControl, InputLabel, MenuItem, Paper, Select, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography } from '@mui/material'
-import React, { useState } from 'react'
+import { Box, Chip, FormControl, InputLabel, MenuItem, Select, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography } from '@mui/material'
+import React, { useEffect, useState } from 'react'
 import SearchIcon from '@mui/icons-material/Search';
+import { getOperationsByStatusService, getOperationsService, getStatusService } from '../../../common/services/api/operations/operation.service';
+import { formatDate } from '../../../common/utils/formaters';
 
 export default function AccountingOperations() {
 
-  const operationsData = [
-    {
-        tableNum:1,
-        date:"03/07/2023,  04:58 PM",
-        paymentMethod:"*** 2334",
-        porboire:25.45,
-        SousTotal:100.49,
-        total:200.20,
-        status:"Réussi",
-        statusPos:"Notifié",
-    },
-    {
-        tableNum:2,
-        date:"03/07/2023,  04:58 PM",
-        paymentMethod:"*** 2334",
-        porboire:25.45,
-        SousTotal:100.49,
-        total:200.20,
-        status:"Échoué",
-        statusPos:"Notifié",
-    },
-    {
-        tableNum:3,
-        date:"03/07/2023,  04:58 PM",
-        paymentMethod:"*** 2334",
-        porboire:25.45,
-        SousTotal:100.49,
-        total:200.20,
-        status:"En attente",
-        statusPos:"Non Notifié",
-    },
-    {
-        tableNum:4,
-        date:"03/07/2023,  04:58 PM",
-        paymentMethod:"*** 2334",
-        porboire:25.45,
-        SousTotal:100.49,
-        total:200.20,
-        status:"Réussi",
-        statusPos:"Notifié",
-    },
-    {
-        tableNum:5,
-        date:"03/07/2023,  04:58 PM",
-        paymentMethod:"*** 2334",
-        porboire:25.45,
-        SousTotal:100.49,
-        total:200.20,
-        status:"Échoué",
-        statusPos:"Notifié",
-    },
-    {
-        tableNum:6,
-        date:"03/07/2023,  04:58 PM",
-        paymentMethod:"*** 2334",
-        porboire:25.45,
-        SousTotal:100.49,
-        total:200.20,
-        status:"Remboursement partiel ",
-        statusPos:"Notifié",
-    },
-    {
-        tableNum:7,
-        date:"03/07/2023,  04:58 PM",
-        paymentMethod:"*** 2334",
-        porboire:25.45,
-        SousTotal:100.49,
-        total:200.20,
-        status:"Remboursement partiel ",
-        statusPos:"Notifié",
-    },
-    {
-        tableNum:8,
-        date:"03/07/2023,  04:58 PM",
-        paymentMethod:"*** 2334",
-        porboire:25.45,
-        SousTotal:100.49,
-        total:200.20,
-        status:"Remboursement partiel ",
-        statusPos:"Notifié",
-    },
-    {
-        tableNum:9,
-        date:"03/07/2023,  04:58 PM",
-        paymentMethod:"*** 2334",
-        porboire:25.45,
-        SousTotal:100.49,
-        total:200.20,
-        status:"Remboursement partiel ",
-        statusPos:"Notifié",
-    },
-    {
-        tableNum:10,
-        date:"03/07/2023,  04:58 PM",
-        paymentMethod:"*** 2334",
-        porboire:25.45,
-        SousTotal:100.49,
-        total:200.20,
-        status:"Remboursement intégral ",
-        statusPos:"Notifié",
-    },
-  ]
+//   const operationsData = [
+//     {
+//         tableNum:1,
+//         date:"03/07/2023,  04:58 PM",
+//         paymentMethod:"*** 2334",
+//         porboire:25.45,
+//         SousTotal:100.49,
+//         total:200.20,
+//         status:"Réussi",
+//         statusPos:"Notifié",
+//     },
+//     {
+//         tableNum:2,
+//         date:"03/07/2023,  04:58 PM",
+//         paymentMethod:"*** 2334",
+//         porboire:25.45,
+//         SousTotal:100.49,
+//         total:200.20,
+//         status:"Échoué",
+//         statusPos:"Notifié",
+//     },
+//     {
+//         tableNum:3,
+//         date:"03/07/2023,  04:58 PM",
+//         paymentMethod:"*** 2334",
+//         porboire:25.45,
+//         SousTotal:100.49,
+//         total:200.20,
+//         status:"En attente",
+//         statusPos:"Non Notifié",
+//     },
+//     {
+//         tableNum:4,
+//         date:"03/07/2023,  04:58 PM",
+//         paymentMethod:"*** 2334",
+//         porboire:25.45,
+//         SousTotal:100.49,
+//         total:200.20,
+//         status:"Réussi",
+//         statusPos:"Notifié",
+//     },
+//     {
+//         tableNum:5,
+//         date:"03/07/2023,  04:58 PM",
+//         paymentMethod:"*** 2334",
+//         porboire:25.45,
+//         SousTotal:100.49,
+//         total:200.20,
+//         status:"Échoué",
+//         statusPos:"Notifié",
+//     },
+//     {
+//         tableNum:6,
+//         date:"03/07/2023,  04:58 PM",
+//         paymentMethod:"*** 2334",
+//         porboire:25.45,
+//         SousTotal:100.49,
+//         total:200.20,
+//         status:"Remboursement partiel ",
+//         statusPos:"Notifié",
+//     },
+//     {
+//         tableNum:7,
+//         date:"03/07/2023,  04:58 PM",
+//         paymentMethod:"*** 2334",
+//         porboire:25.45,
+//         SousTotal:100.49,
+//         total:200.20,
+//         status:"Remboursement partiel ",
+//         statusPos:"Notifié",
+//     },
+//     {
+//         tableNum:8,
+//         date:"03/07/2023,  04:58 PM",
+//         paymentMethod:"*** 2334",
+//         porboire:25.45,
+//         SousTotal:100.49,
+//         total:200.20,
+//         status:"Remboursement partiel ",
+//         statusPos:"Notifié",
+//     },
+//     {
+//         tableNum:9,
+//         date:"03/07/2023,  04:58 PM",
+//         paymentMethod:"*** 2334",
+//         porboire:25.45,
+//         SousTotal:100.49,
+//         total:200.20,
+//         status:"Remboursement partiel ",
+//         statusPos:"Notifié",
+//     },
+//     {
+//         tableNum:10,
+//         date:"03/07/2023,  04:58 PM",
+//         paymentMethod:"*** 2334",
+//         porboire:25.45,
+//         SousTotal:100.49,
+//         total:200.20,
+//         status:"Remboursement intégral ",
+//         statusPos:"Notifié",
+//     },
+//   ]
   const paginationItems = [1,2,3,4,5];
-  const [activedItemPagination, setActivedItemPagination] = useState(1);
-  // select logic
-    const [age, setAge] = React.useState('');
+  const [operations, setOperations] = useState([]);
+  const [statusArray, setStatusArray] = useState([
+    {
+        id:0,
+        label:"Tous"
+    }
+  ]);
+    const [activedItemPagination, setActivedItemPagination] = useState(1);
+    
+    // select logic
+    const [statusValue, setStatusValue] = React.useState();
 
-    const handleChange = (event) => {
-        setAge(event.target.value);
+    const handleChangeFilterByStatus = (event) => {
+        setStatusValue(event.target.value);
+        // console.log(statusValue)
+        getOperationsByStatusService(event.target.value)
+        .then((res) => res.json())
+        .then((data) => setOperations(data.operations))
+        .catch((err) => console.log(err))
     };
+
+    useEffect(() => {
+        getOperationsService()
+        .then((res) => res.json())
+        .then((data) => setOperations(data.operations))
+        .catch((err) => console.log(err))
+
+        getStatusService()
+        .then((res) => res.json())
+        .then((data) => setStatusArray([
+            ...statusArray,
+            ...data.statusOperations
+        ]))
+        .catch((err) => console.log(err)) 
+    },[])
 
     const getStatusBackgorundColor = (status) => {
         let statusColor = "";
@@ -127,10 +157,10 @@ export default function AccountingOperations() {
             case "En attente": 
                 statusColor = "#FFBC39";
                 break; 
-            case "Remboursement partiel ": 
+            case "Remboursement partiel": 
                 statusColor = "#E787FF";
                 break; 
-            case "Remboursement intégral ": 
+            case "Remboursement intégral": 
                 statusColor = "#75F7FF";
                 break; 
             default:
@@ -147,6 +177,7 @@ export default function AccountingOperations() {
             padding:"18px"
         }}
     >
+        
         <Box sx={{display:"flex", justifyContent:"space-between"}}>
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
                 {/* <AccountCircle sx={{ color: 'action.active', mr: 1, my: 0.5 }} /> */}
@@ -173,19 +204,25 @@ export default function AccountingOperations() {
             <Box>
                 <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
                     <InputLabel id="demo-select-small-label">Status</InputLabel>
-                    <Select
+                      <Select
                         labelId="demo-select-small-label"
                         id="demo-select-small"
-                        value={age}
-                        label="Age"
-                        onChange={handleChange}
+                        value={statusValue}
+                        label="Status"
+                        onChange={handleChangeFilterByStatus}
                     >
-                        {/* <MenuItem value="" selected>
-                            <em>None</em>
+                        {/* <MenuItem value={0}>
+                           Tous
                         </MenuItem> */}
-                        <MenuItem value={10}>Tous</MenuItem>
-                        <MenuItem value={20}>Twenty</MenuItem>
-                        <MenuItem value={30}>Thirty</MenuItem>
+                        {
+                            statusArray && statusArray.map((item, key) => {
+                                return (
+                                    <MenuItem key={item.label} value={item.id}>
+                                        {item.label}
+                                    </MenuItem>
+                                )
+                            })
+                        }
                     </Select>
                 </FormControl>
             </Box>
@@ -207,52 +244,62 @@ export default function AccountingOperations() {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                { operationsData.map((row) => (
+                { operations.map((row) => (
                     <TableRow
-                       key={row.tableNum}
+                       key={row.tabNum}
                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                     >
                         <TableCell component="th" scope="row" sx={{paddingX:"5px", paddingY:"10px" }}>
-                            <Typography sx={{fontSize:"13px"}}>
-                              {row.tableNum}
+                            <Typography sx={{fontSize:"13px", fontWeight:"500"}}>
+                              {row.tabNum}
                             </Typography>
                         </TableCell>
                         <TableCell align="left" sx={{paddingX:"3px", paddingY:"10px" }}>
-                            <Typography sx={{fontSize:"13px"}}>
-                              {row.date}
+                            <Typography sx={{fontSize:"13px", fontWeight:"500"}}>
+                              {formatDate(row.date_operation)}
+                            </Typography>
+                        </TableCell>
+                        <TableCell align="left" sx={{ paddingX: "3px", paddingY: "10px"}}>
+                             <Box display="flex" alignItems="center">
+                                <img src={`/images/accounting/${row.tabNum % 2 === 0 ? 'visa-icon' : 'master-card-icon'}.svg`} alt="icon-payment-method" />
+                                <Typography sx={{fontSize:"13px", fontWeight:"500"}}>
+                                  <Box as="span" marginX={"3px"}>***</Box>
+                                  {row.payment_method}
+                                </Typography>
+                             </Box>
+                        </TableCell>
+                        <TableCell align="left" sx={{paddingX:"3px", paddingY:"10px" }}>
+                            <Typography sx={{fontSize:"13px", fontWeight:"500"}}>
+                                {row.pourboire + " Dh"}
                             </Typography>
                         </TableCell>
                         <TableCell align="left" sx={{paddingX:"3px", paddingY:"10px" }}>
-                            <img src={`/images/accounting/${row.tableNum % 2 === 0 ? 'visa-icon' : 'master-card-icon'}.svg`} alt="icon-payment-method" />{row.paymentMethod}
-                        </TableCell>
-                        <TableCell align="left" sx={{paddingX:"3px", paddingY:"10px" }}>
-                            <Typography sx={{fontSize:"13px"}}>
-                                {row.porboire + " Dh"}
+                            <Typography sx={{fontSize:"13px", fontWeight:"500"}}>
+                                {row.subTotal + " Dh"}
                             </Typography>
                         </TableCell>
                         <TableCell align="left" sx={{paddingX:"3px", paddingY:"10px" }}>
-                            <Typography sx={{fontSize:"13px"}}>
-                                {row.SousTotal + " Dh"}
-                            </Typography>
-                        </TableCell>
-                        <TableCell align="left" sx={{paddingX:"3px", paddingY:"10px" }}>
-                             <Typography sx={{fontSize:"13px"}}>
+                             <Typography sx={{fontSize:"13px", fontWeight:"500"}}>
                                 {row.total + " Dh"}
                             </Typography>
                         </TableCell>
                         <TableCell align="left" sx={{paddingX:"3px", paddingY:"10px" }}>
                             <Stack direction="row" spacing={1}>
-                                <Chip label={row.status} sx={{
-                                        backgroundColor: getStatusBackgorundColor(row.status)
+                                <Chip label={row.status.label} sx={{
+                                        backgroundColor: getStatusBackgorundColor(row.status.label),
+                                        fontSize:"13px",
+                                        fontWeight:"500"
                                     }} 
                                 />
-                                { (row.status === "Échoué" || row.status === "En attente") && <img src="/images/accounting/icon-failed-status.svg" alt="icon-failed-status" /> }
+                                { (row.status.label === "Échoué" || row.status.label === "En attente") && <img src="/images/accounting/icon-failed-status.svg" alt="icon-failed-status" /> }
                             </Stack> 
                         </TableCell>
                         <TableCell align="left" sx={{paddingX:"5px", paddingY:"10px" }}>
                             <Stack direction="row" spacing={1}>
-                                <Chip label={row.statusPos} sx={{
-                                        backgroundColor: row.statusPos === "Notifié" ? "#90F487" : "#FDFF9B"
+                                <Chip label={row.status_pos} sx={{
+                                        backgroundColor: row.status_pos === "Notifié" ? "#90F487" : "#FDFF9B",
+                                        fontSize:"13px",
+                                        fontWeight:"500"
                                     }} 
                                 />
                             </Stack> 
