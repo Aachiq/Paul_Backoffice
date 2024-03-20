@@ -6,108 +6,6 @@ import { formatDate } from '../../../common/utils/formaters';
 
 export default function AccountingOperations() {
 
-//   const operationsData = [
-//     {
-//         tableNum:1,
-//         date:"03/07/2023,  04:58 PM",
-//         paymentMethod:"*** 2334",
-//         porboire:25.45,
-//         SousTotal:100.49,
-//         total:200.20,
-//         status:"Réussi",
-//         statusPos:"Notifié",
-//     },
-//     {
-//         tableNum:2,
-//         date:"03/07/2023,  04:58 PM",
-//         paymentMethod:"*** 2334",
-//         porboire:25.45,
-//         SousTotal:100.49,
-//         total:200.20,
-//         status:"Échoué",
-//         statusPos:"Notifié",
-//     },
-//     {
-//         tableNum:3,
-//         date:"03/07/2023,  04:58 PM",
-//         paymentMethod:"*** 2334",
-//         porboire:25.45,
-//         SousTotal:100.49,
-//         total:200.20,
-//         status:"En attente",
-//         statusPos:"Non Notifié",
-//     },
-//     {
-//         tableNum:4,
-//         date:"03/07/2023,  04:58 PM",
-//         paymentMethod:"*** 2334",
-//         porboire:25.45,
-//         SousTotal:100.49,
-//         total:200.20,
-//         status:"Réussi",
-//         statusPos:"Notifié",
-//     },
-//     {
-//         tableNum:5,
-//         date:"03/07/2023,  04:58 PM",
-//         paymentMethod:"*** 2334",
-//         porboire:25.45,
-//         SousTotal:100.49,
-//         total:200.20,
-//         status:"Échoué",
-//         statusPos:"Notifié",
-//     },
-//     {
-//         tableNum:6,
-//         date:"03/07/2023,  04:58 PM",
-//         paymentMethod:"*** 2334",
-//         porboire:25.45,
-//         SousTotal:100.49,
-//         total:200.20,
-//         status:"Remboursement partiel ",
-//         statusPos:"Notifié",
-//     },
-//     {
-//         tableNum:7,
-//         date:"03/07/2023,  04:58 PM",
-//         paymentMethod:"*** 2334",
-//         porboire:25.45,
-//         SousTotal:100.49,
-//         total:200.20,
-//         status:"Remboursement partiel ",
-//         statusPos:"Notifié",
-//     },
-//     {
-//         tableNum:8,
-//         date:"03/07/2023,  04:58 PM",
-//         paymentMethod:"*** 2334",
-//         porboire:25.45,
-//         SousTotal:100.49,
-//         total:200.20,
-//         status:"Remboursement partiel ",
-//         statusPos:"Notifié",
-//     },
-//     {
-//         tableNum:9,
-//         date:"03/07/2023,  04:58 PM",
-//         paymentMethod:"*** 2334",
-//         porboire:25.45,
-//         SousTotal:100.49,
-//         total:200.20,
-//         status:"Remboursement partiel ",
-//         statusPos:"Notifié",
-//     },
-//     {
-//         tableNum:10,
-//         date:"03/07/2023,  04:58 PM",
-//         paymentMethod:"*** 2334",
-//         porboire:25.45,
-//         SousTotal:100.49,
-//         total:200.20,
-//         status:"Remboursement intégral ",
-//         statusPos:"Notifié",
-//     },
-//   ]
   const paginationItems = [1,2,3,4,5];
   const [operations, setOperations] = useState([]);
   const [statusArray, setStatusArray] = useState([
@@ -121,14 +19,17 @@ export default function AccountingOperations() {
     // select logic
     const [statusValue, setStatusValue] = React.useState();
 
-    const handleChangeFilterByStatus = (event) => {
-        setStatusValue(event.target.value);
-        // console.log(statusValue)
-        getOperationsByStatusService(event.target.value)
-        .then((res) => res.json())
-        .then((data) => setOperations(data.operations))
-        .catch((err) => console.log(err))
-    };
+    // const handleChangeFilterByStatus = (event) => {
+    //     setStatusValue(event.target.value);
+    //     getOperationsByStatusService(event.target.value)
+    //     .then((res) => res.json())
+    //     .then((data) => {
+    //         console.log(data.operations);
+    //         setOperations(data.operations)
+    //         console.log(operations)
+    //     })
+    //     .catch((err) => console.log(err))
+    // };
 
     useEffect(() => {
         getOperationsService()
@@ -180,21 +81,18 @@ export default function AccountingOperations() {
         
         <Box sx={{display:"flex", justifyContent:"space-between"}}>
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                {/* <AccountCircle sx={{ color: 'action.active', mr: 1, my: 0.5 }} /> */}
                 <SearchIcon fontSize="20px" />
                 <TextField id="input-with-sx" variant="standard" placeholder='Search by date' 
                     sx={{marginLeft:"5px",}}
                 />
             </Box>
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                {/* <AccountCircle sx={{ color: 'action.active', mr: 1, my: 0.5 }} /> */}
                 <SearchIcon fontSize="20px" />
                 <TextField id="input-with-sx" variant="standard" placeholder='Search by amount' 
                     sx={{marginLeft:"5px",}}
                 />
             </Box>
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                {/* <AccountCircle sx={{ color: 'action.active', mr: 1, my: 0.5 }} /> */}
                 <SearchIcon fontSize="20px" />
                 <TextField id="input-with-sx" variant="standard" placeholder='Search by card' 
                     sx={{marginLeft:"5px",}}
@@ -209,7 +107,7 @@ export default function AccountingOperations() {
                         id="demo-select-small"
                         value={statusValue}
                         label="Status"
-                        onChange={handleChangeFilterByStatus}
+                        // onChange={handleChangeFilterByStatus}
                     >
                         {/* <MenuItem value={0}>
                            Tous
