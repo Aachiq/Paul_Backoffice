@@ -33,7 +33,7 @@ export default function SideBar() {
             id: 5,
             label :"Gestion des menus",
             icon: "book.svg",
-            link : "/home"
+            link : "/menu-food"
         },
         {
             id: 6,

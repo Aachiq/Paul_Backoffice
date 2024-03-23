@@ -4,6 +4,7 @@ import SignIn from './components/Auth/SignIn';
 import SingInForgetPassword from './components/Auth/SingInForgetPassword';
 import Accounting from './components/EntryPanel/Accounting/Accounting';
 import Home from './components/EntryPanel/Home/Home';
+import MenuFoodLayout from './components/EntryPanel/MenuFood/MenuFoodLayout';
 
 export default function Routing() {
   return (
@@ -13,6 +14,7 @@ export default function Routing() {
           {/* <Route path="/signin-forget-password" exact element={<SingInForgetPassword/>}/> */}
           <Route path="/home" exact element={<Home/>}/>
           <Route path="/comptabilite" exact element={<Accounting/>}/>
+          <Route path="/menu-food" exact element={<MenuFoodLayout/>}/>
        </Routes>
      </div>
   )      
