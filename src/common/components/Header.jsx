@@ -1,14 +1,16 @@
 import { Avatar, Box, IconButton, InputAdornment, Menu, MenuItem, TextField, Typography } from '@mui/material'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import SearchIcon from '@mui/icons-material/Search';
 import { useNavigate } from 'react-router-dom';
-import { RemoveItemLocalStorage } from '../utils/auth_helper';
+import { RemoveItemLocalStorage, getItemLocalStorage } from '../utils/auth_helper';
 import { logoutBo } from '../services/api/auth/auth.service';
 
 export default function Header() {
     const navigate = useNavigate()
+    const [userAuthInfos, setUserAuthInfos] = useState({})
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
+
     const handleClick = (event) => {
         console.log(event.currentTarget)
         setAnchorEl(event.currentTarget);
@@ -24,6 +26,10 @@ export default function Header() {
         })
         .catch()
     }
+
+    useEffect(() => {
+       setUserAuthInfos(getItemLocalStorage("userBo_infos"))
+    },[])
 
   return (
     <Box display={"flex"} flexDirection={"row"} justifyContent={"space-between"} alignItems={"center"}  bgcolor={"#FFFFFF"}>
@@ -50,8 +56,10 @@ export default function Header() {
                     <Avatar alt="user_picture" src="/images/avatar.png" />
                 </Box>
                 <Box display={"flex"} flexDirection={"column"} marginRight={2.5}>
-                    <Typography variant='p' sx={{ typography: 'subtitle2' }}>Karam Noury</Typography>
-                    <Typography variant='p' color={"#7C7C7C"}>Manager</Typography>
+                    <Typography variant='p' sx={{ typography: 'subtitle2' }}>
+                        {userAuthInfos && userAuthInfos.user?.email }
+                    </Typography>
+                    <Typography variant='p' color={"#7C7C7C"}>Admin</Typography>
                 </Box>
             </Box>
             <Box 
